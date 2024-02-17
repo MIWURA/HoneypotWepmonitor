@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    </script>
+    {% extends 'home.html' %}
+</head>
+<body>
+    {% block content %}
+    <div class="container" id="content">
+        <h2 class="mt-5 mb-4">History</h2>
+        <table class="table table-bordered" >
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Alert</th>
+                    <th style="width: 10%;">Date</th>
+                    <th style="width: 10%;">Time</th>
+                    <th>IP_ATK</th>
+                    <th>IP_SERVER</th>
+                    <th>PROTOCOL</th>
+                    <th>COMMENT</th>
+                </tr>
+            </thead>
+            <tbody id="data-table-body">
+                {% for item in data['data'] %}
+                    <tr>
+                        <td>{{ item['type'] }}</td>
+                        <td>{{ item['alert'] }}</td>
+                        <td>{{ item['date'] }}</td>
+                        <td>{{ item['time'] }}</td>
+                        <td>{{ item['ip_attacker'] }}</td>
+                        <td>{{ item['ip_server'] }}</td>
+                        <td>{{ item['protocol'] }}</td>
+                        <td>{{ item['comment'] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>        
+    </div>
+    {% endblock %}
+</body>
+</html>

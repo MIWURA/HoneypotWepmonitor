@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <title>Home</title>
+    <style>
+        /* สไตล์เพื่อให้ tab ด้านซ้าย */
+        .sidebar {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            padding: 10px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #818181;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 16px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        .red-cell {
+            color: red;
+        }
+
+        .yellow-cell {
+            color: rgb(237, 237, 1);
+        }
+
+        .orange-cell {
+            color: orange;
+        }
+
+</style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="/">Home</a>
+        <a href="/cowrie">Cowrie</a>
+        <a href="/dionaea">Dionaea</a>
+        <a href="/Monitor">Monitoring</a>
+        <a href="/History">History</a>
+        <!-- เพิ่ม tab ตามต้องการ -->
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>Honeypot For Home Network Security </h1>
+        <!-- แทนที่เนื้อหา tab ด้วย include ของ Flask Template -->
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    
+</body>
+</html>

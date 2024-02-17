@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Time Table</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf-8">
+    var socket = io();
+    socket.on('connect', function() {
+        socket.emit('my event', {data: 'I\'m connected!'});
+    });
+    </script>
+    {% extends 'home.html' %}
+</head>
+<body>
+    {% block content %}
+    <script type="text/javascript" src="{{ url_for('static', filename = 'js/app.js') }}"></script>
+    <div class="container" id="content">
+        <h2 class="mt-5 mb-4">Real Time Table</h2>
+
+        <form method="post" action="/Monitor">
+            <label for="SORTBY">SORT BY :</label>
+            <select id="SORTBY" name="SORTBY">
+                <option value="Defaul">- Select -</option>
+                <option value="Type">Type</option>
+                <option value="Alert" >Alert</option>
+            </select>
+            <label for="Where">Where :</label>
+            <select id="intable_value" name="intable_value"></select>
+            <button type="submit">Submit</button>
+        </form>
+        
+
+        <table class="table table-bordered" >
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Alert</th>
+                    <th style="width: 10%;">Date</th>
+                    <th style="width: 10%;">Time</th>
+                    <th>IP_ATK</th>
+                    <th>IP_SERVER</th>
+                    <th>PROTOCOL</th>
+                    <th>COMMENT</th>
+                </tr>
+            </thead>
+            <tbody id="data-table-body"></tbody>
+        </table>        
+    </div>
+    {% endblock %}
+</body>
+</html>

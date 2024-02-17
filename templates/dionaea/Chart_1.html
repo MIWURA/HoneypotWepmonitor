@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <script>
+        // สร้าง Chart จากข้อมูลที่ได้จาก Flask
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var protocol_counts = {{ protocol_counts | safe }};
+        
+        var labels = Object.keys(protocol_counts);
+        var data = Object.values(protocol_counts);
+    
+        // สร้าง array ของสีที่คุณต้องการใช้ (RGB format)
+        var colors = [
+            'rgb(255, 99, 132)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(54, 162, 235)',
+            'rgb(153, 102, 255)',
+            'rgb(201, 203, 207)'
+        ];
+    
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Connection Protocol Counts',
+                    data: data,
+                    backgroundColor: colors,
+                    borderColor: colors,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                responsive: true, // ทำให้ Chart ปรับขนาดตามขนาดของ container
+                maintainAspectRatio: false,
+                aspectRatio: 0.8 // กำหนดสัดส่วนของ Chart (ค่าเริ่มต้นคือ 2)
+                
+            }
+        });
+    </script>
+</body>
+</html>
